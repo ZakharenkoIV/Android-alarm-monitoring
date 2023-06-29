@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import ru.example.alarmmonitoring.R
-import ru.example.alarmmonitoring.databinding.FragmentFirstBinding
+import ru.example.alarmmonitoring.databinding.FragmentHomeBinding
 
-class FirstFragment : Fragment() {
-    private lateinit var binding: FragmentFirstBinding
+class HomeFragment : Fragment() {
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var connectButton1: Button
     private lateinit var connectButton2: Button
     private lateinit var connectButton3: Button
@@ -26,7 +26,7 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,21 +42,21 @@ class FirstFragment : Fragment() {
         setupConnectButtons()
 
         messagesButton.setOnClickListener {
-            val thirdFragment = ThirdFragment()
+            val logFragment = LogFragment()
             val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, thirdFragment)
+            transaction.replace(R.id.fragment_container, logFragment)
             transaction.addToBackStack(null)
             transaction.commit()
         }
 
         settingsButton.setOnClickListener {
             val fragmentManager: FragmentManager = parentFragmentManager
-            val existingFragment = fragmentManager.findFragmentByTag("SECOND_FRAGMENT")
+            val existingFragment = fragmentManager.findFragmentByTag("SETTING_FRAGMENT")
 
             if (existingFragment == null) {
-                val fragment = SecondFragment()
+                val fragment = SettingFragment()
                 val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_container, fragment, "SECOND_FRAGMENT")
+                transaction.replace(R.id.fragment_container, fragment, "SETTING_FRAGMENT")
                 transaction.addToBackStack(null)
                 transaction.commit()
             }

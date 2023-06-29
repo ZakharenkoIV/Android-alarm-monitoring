@@ -1,6 +1,5 @@
 package ru.example.alarmmonitoring.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,7 +12,7 @@ import androidx.fragment.app.Fragment
 import ru.example.alarmmonitoring.R
 import ru.example.alarmmonitoring.data.TableItem
 
-class ThirdFragment : Fragment() {
+class LogFragment : Fragment() {
 
     private lateinit var tableLayout: TableLayout
 
@@ -22,7 +21,7 @@ class ThirdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_third, container, false)
+        return inflater.inflate(R.layout.fragment_log, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

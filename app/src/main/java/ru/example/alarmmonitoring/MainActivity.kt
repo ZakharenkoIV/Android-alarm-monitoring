@@ -2,11 +2,10 @@ package ru.example.alarmmonitoring
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import ru.example.alarmmonitoring.fragments.FirstFragment
-import ru.example.alarmmonitoring.fragments.SecondFragment
+import ru.example.alarmmonitoring.fragments.HomeFragment
+import ru.example.alarmmonitoring.fragments.SettingFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,14 +22,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showFirstFragment() {
-        val fragment = FirstFragment()
+        val fragment = HomeFragment()
         val transaction: FragmentTransaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
 
     private fun showSecondFragment() {
-        val fragment = SecondFragment()
+        val fragment = SettingFragment()
         val transaction: FragmentTransaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null) // Добавление транзакции в стек возврата

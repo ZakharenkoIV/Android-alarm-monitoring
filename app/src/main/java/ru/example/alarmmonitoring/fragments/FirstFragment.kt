@@ -42,7 +42,11 @@ class FirstFragment : Fragment() {
         setupConnectButtons()
 
         messagesButton.setOnClickListener {
-            // Обработка нажатия на кнопку "Сообщения"
+            val thirdFragment = ThirdFragment()
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, thirdFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
         settingsButton.setOnClickListener {
@@ -60,20 +64,20 @@ class FirstFragment : Fragment() {
     }
 
     private fun setupConnectButtons() {
-        connectButton1.setBackgroundResource(R.drawable.red_circle)
-        connectButton2.setBackgroundResource(R.drawable.red_circle)
-        connectButton3.setBackgroundResource(R.drawable.red_circle)
+        connectButton1.setBackgroundResource(R.drawable.not_work_circle)
+        connectButton2.setBackgroundResource(R.drawable.not_work_circle)
+        connectButton3.setBackgroundResource(R.drawable.not_work_circle)
 
         connectButton1.setOnClickListener {
-            connectButton1.setBackgroundResource(R.drawable.green_circle)
+            connectButton1.setBackgroundResource(R.drawable.loading_circle)
         }
 
         connectButton2.setOnClickListener {
-            connectButton2.setBackgroundResource(R.drawable.green_circle)
+            connectButton2.setBackgroundResource(R.drawable.loading_circle)
         }
 
         connectButton3.setOnClickListener {
-            connectButton3.setBackgroundResource(R.drawable.green_circle)
+            connectButton3.setBackgroundResource(R.drawable.loading_circle)
         }
     }
 }

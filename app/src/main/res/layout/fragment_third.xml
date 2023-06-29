@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:showDividers="middle">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/table_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:divider="?android:attr/dividerVertical"
+                android:dividerPadding="4dp"
+                android:showDividers="middle">
+
+                <!-- Шапка таблицы -->
+                <TableRow
+                    android:id="@+id/header_row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#2358A8">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Время"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Датчик"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Описание датчика"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Актуальное значение"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Граница значения"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Сообщение"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:singleLine="true"
+                        android:text="Рекомендации"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <!-- Разделение строк -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#000000" />
+
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,37 +2,26 @@ package ru.example.alarmmonitoring
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import ru.example.alarmmonitoring.fragments.HomeFragment
-import ru.example.alarmmonitoring.fragments.SettingFragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var fragmentManager: FragmentManager
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fragmentManager = supportFragmentManager
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        showFirstFragment()
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
     }
 
-    private fun showFirstFragment() {
-        val fragment = HomeFragment()
-        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.commit()
-    }
-
-    private fun showSecondFragment() {
-        val fragment = SettingFragment()
-        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null) // Добавление транзакции в стек возврата
-        transaction.commit()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="logTableLine"
+            type="ru.example.alarmmonitoring.data.LogTableLine" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{logTableLine.time}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{logTableLine.sensor}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sensorDescriptionTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{logTableLine.sensorDescription}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/actualValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{logTableLine.actualValue}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/boundaryValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{logTableLine.boundaryValue}"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/alarmMessageTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{logTableLine.alarmMessage}"
+            android:textSize="18sp" />
+    </LinearLayout>
+</layout>

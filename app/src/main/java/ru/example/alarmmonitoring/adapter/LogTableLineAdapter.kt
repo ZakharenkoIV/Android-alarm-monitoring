@@ -1,40 +1,55 @@
 package ru.example.alarmmonitoring.adapter
 
-import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.drawable.ShapeDrawable
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
 import ru.example.alarmmonitoring.data.LogTableLine
-import ru.example.alarmmonitoring.databinding.LogTableLineItemBinding
 
-class LogTableLineAdapter : RecyclerView.Adapter<LogTableLineAdapter.LogTableLineViewHolder>() {
+class LogTableLineAdapter(private val tableLayout: TableLayout) {
 
     var data = listOf<LogTableLine>()
-        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LogTableLineViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = LogTableLineItemBinding.inflate(inflater, parent, false)
-        return LogTableLineViewHolder(binding)
+    fun notifyDataSetChanged() {
+        tableLayout.removeAllViews()
+        addData()
     }
 
-    override fun onBindViewHolder(holder: LogTableLineViewHolder, position: Int) {
-        val item = data[position]
-        holder.bind(item)
-    }
-
-    override fun getItemCount() = data.size
-
-    class LogTableLineViewHolder(private val binding: LogTableLineItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: LogTableLine) {
-            binding.logTableLine = item
-            binding.executePendingBindings()
+    private fun addData() {
+        for (item in data) {
+            val dataRow = TableRow(tableLayout.context)
+            dataRow.addView(createTextView(item.time))
+            dataRow.addView(createTextView(item.sensor))
+            dataRow.addView(createTextView(item.sensorDescription))
+            dataRow.addView(createTextView(item.actualValue))
+            dataRow.addView(createTextView(item.boundaryValue))
+            dataRow.addView(createTextView(item.alarmMessage))
+            tableLayout.addView(dataRow)
         }
+    }
+
+    private fun createTextView(text: String): TextView {
+        val textView = TextView(tableLayout.context)
+        textView.text = text
+        textView.setPadding(20, 10, 20, 10)
+
+        // Создаем объект ShapeDrawable для установки границ
+        val border = ShapeDrawable()
+        // Устанавливаем цвет границы
+        border.paint.color = Color.BLACK
+        // Устанавливаем толщину границы в пикселях
+        val borderWidth = 2
+        border.paint.strokeWidth = borderWidth.toFloat()
+        // Устанавливаем стиль границы (SOLID - сплошная линия)
+        border.paint.style = Paint.Style.STROKE
+        // Устанавливаем объект ShapeDrawable в качестве фона у TextView
+        textView.background = border
+        return textView
     }
 }

@@ -151,7 +151,7 @@ public class PubNubClient implements DataClient {
             register(this.userId, settingViewModel.isSuccessfulConnection);
             subscribe();
 
-            messageController.toAccept("1 1 1 E121 10:05 70"); //для теста
+            messageController.toAccept("1 1 1 E15555555555555555555555555555555555555555555555555555555555521 10:05 70"); //для теста
         }
     }
 

@@ -4,5 +4,6 @@ data class HomeTableLine(
     val time: String,
     val sensor: String,
     val value: String,
-    val alarmMessage: String
+    val alarmMessage: String,
+    val signalClass: String
 )

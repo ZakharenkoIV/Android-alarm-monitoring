@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_signal_class_0">#84F1FF</color>
+    <color name="color_signal_class_1">#FFFB00</color>
+    <color name="color_signal_class_2">#F60101</color>
+    <color name="color_signal_class_def">#FFFFFFFF</color>
+    <color name="color_background_table">#283328</color>
+    <color name="color_background_header">#019701</color>
 </resources>

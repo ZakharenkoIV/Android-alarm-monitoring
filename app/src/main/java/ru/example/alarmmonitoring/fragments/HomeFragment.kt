@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import ru.example.alarmmonitoring.MainActivity
 import ru.example.alarmmonitoring.R
 import ru.example.alarmmonitoring.adapter.HomeTableLineAdapter
@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var settingViewModel: SettingViewModel
-    private val homeTableLineAdapter = HomeTableLineAdapter()
+    private lateinit var homeTableLineAdapter: HomeTableLineAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +40,8 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = homeTableLineAdapter
+        val tableLayout = view.findViewById<TableLayout>(R.id.tableLayout)
+        homeTableLineAdapter = HomeTableLineAdapter(tableLayout)
 
         homeViewModel.tableData.observe(viewLifecycleOwner) { data ->
             homeTableLineAdapter.data = data
@@ -57,6 +57,10 @@ class HomeFragment : Fragment() {
         binding.settingsButton.setOnClickListener {
             val actionId = R.id.action_homeFragment_to_settingFragment
             findNavController().navigate(actionId)
+        }
+
+        binding.clearButton.setOnClickListener {
+            homeViewModel.clearTable()
         }
     }
 }

@@ -130,7 +130,8 @@ public class MessageController {
                 sensorDescription,
                 actualSignalValue,
                 boundaryValue,
-                alarmMessage);
+                alarmMessage,
+                signalClass);
     }
 
     public HomeTableLine generateHomeTableLine(LogTableLine logTableLine) {
@@ -138,7 +139,8 @@ public class MessageController {
         String sensor = logTableLine.getSensor();
         String value = logTableLine.getActualValue() + " (" + logTableLine.getBoundaryValue() + ")";
         String alarmMessage = logTableLine.getAlarmMessage();
-        return new HomeTableLine(signalTime, sensor, value, alarmMessage);
+        String signalClass = logTableLine.getSignalClass();
+        return new HomeTableLine(signalTime, sensor, value, alarmMessage, signalClass);
     }
 
     public void setLogTableData(@NotNull MutableLiveData<List<LogTableLine>> logTableData) {
@@ -147,5 +149,9 @@ public class MessageController {
 
     public void setHomeTableData(@NotNull MutableLiveData<List<HomeTableLine>> homeTableData) {
         this.homeTableData = homeTableData;
+    }
+
+    public void clearHomeMessage() {
+        homeTableData.postValue(new LinkedList<>());
     }
 }

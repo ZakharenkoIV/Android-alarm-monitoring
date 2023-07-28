@@ -9,6 +9,7 @@
         <variable
             name="homeViewModel"
             type="ru.example.alarmmonitoring.fragments.viewmodel.HomeViewModel" />
+
         <variable
             name="settingViewModel"
             type="ru.example.alarmmonitoring.fragments.viewmodel.SettingViewModel" />
@@ -91,40 +92,92 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="spread"
-                    tools:ignore="MissingConstraints">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    app:layout_constraintVertical_chainStyle="spread">
+                    <LinearLayout
+                        android:id="@+id/linearLayout5"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="right">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Вн.к."
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"/>
+                        <TextView
+                            android:id="@+id/textViewVnK"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NaN"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="bar"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"/>
+                        <TextView
+                            android:id="@+id/textViewTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NaN"
+                            android:paddingStart="30dp"
+                            android:paddingEnd="30dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@color/color_background_table">
 
                         <HorizontalScrollView
                             android:id="@+id/scrollView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
                             <ScrollView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/recycler_view"
+                                android:layout_height="match_parent">
+
+                                <TableLayout
+                                    android:id="@+id/tableLayout"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:dividerPadding="4dp"
-                                    android:showDividers="middle" />
+                                    android:layout_height="wrap_content">
+                                </TableLayout>
                             </ScrollView>
                         </HorizontalScrollView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/messages_button11"
+                            android:id="@+id/clear_button"
                             android:layout_width="124dp"
                             android:layout_height="40dp"
                             android:layout_marginEnd="16dp"
                             android:text="Квитировать"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

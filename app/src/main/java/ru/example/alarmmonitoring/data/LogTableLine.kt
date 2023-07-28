@@ -6,5 +6,6 @@ data class LogTableLine(
     val sensorDescription: String,
     val actualValue: String,
     val boundaryValue: String,
-    val alarmMessage: String
+    val alarmMessage: String,
+    val signalClass: String
 )

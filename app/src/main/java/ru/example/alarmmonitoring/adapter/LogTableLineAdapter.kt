@@ -1,11 +1,14 @@
 package ru.example.alarmmonitoring.adapter
 
-import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import ru.example.alarmmonitoring.R
 import ru.example.alarmmonitoring.data.LogTableLine
 
 class LogTableLineAdapter(private val tableLayout: TableLayout) {
@@ -16,40 +19,169 @@ class LogTableLineAdapter(private val tableLayout: TableLayout) {
             notifyDataSetChanged()
         }
 
-    fun notifyDataSetChanged() {
+    private fun notifyDataSetChanged() {
         tableLayout.removeAllViews()
+        if (!hasHeader()) {
+            addHeaders()
+        }
         addData()
     }
 
     private fun addData() {
-        for (item in data) {
+        // Если шапка уже есть, начинаем добавлять данные со второго элемента
+        val startIndex = 0
+
+        for (i in startIndex until data.size) {
+            val item = data[i]
             val dataRow = TableRow(tableLayout.context)
-            dataRow.addView(createTextView(item.time))
-            dataRow.addView(createTextView(item.sensor))
-            dataRow.addView(createTextView(item.sensorDescription))
-            dataRow.addView(createTextView(item.actualValue))
-            dataRow.addView(createTextView(item.boundaryValue))
-            dataRow.addView(createTextView(item.alarmMessage))
-            tableLayout.addView(dataRow)
+            dataRow.addView(noHorScroll(setBackgroundHeader(createTextView((i + 1).toString()))))
+            dataRow.addView(setBackgroundTextView(createTextView(item.time), item.signalClass))
+            dataRow.addView(setBackgroundTextView(createTextView(item.sensor), item.signalClass))
+            dataRow.addView(
+                setBackgroundTextView(
+                    createTextView(item.sensorDescription),
+                    item.signalClass
+                )
+            )
+            dataRow.addView(
+                setBackgroundTextView(
+                    createTextView(item.actualValue),
+                    item.signalClass
+                )
+            )
+            dataRow.addView(
+                setBackgroundTextView(
+                    createTextView(item.boundaryValue),
+                    item.signalClass
+                )
+            )
+            dataRow.addView(
+                setBackgroundTextView(
+                    createTextView(item.alarmMessage),
+                    item.signalClass
+                )
+            )
+
+            // Добавляем новую строку только после шапки, если она уже есть
+            if (hasHeader()) {
+                tableLayout.addView(dataRow, i + 1)
+            } else {
+                tableLayout.addView(dataRow)
+            }
         }
+    }
+
+    private fun addHeaders() {
+        val headerRow = TableRow(tableLayout.context)
+        headerRow.addView(noHorScroll(setBackgroundHeader(createTextView("№"))))
+        headerRow.addView(setBackgroundHeader(createTextView("Время")))
+        headerRow.addView(setBackgroundHeader(createTextView("Датчик")))
+        headerRow.addView(setBackgroundHeader(createTextView("Описание датчика")))
+        headerRow.addView(setBackgroundHeader(createTextView("Значение")))
+        headerRow.addView(setBackgroundHeader(createTextView("Граница")))
+        headerRow.addView(setBackgroundHeader(createTextView("Сообщение")))
+        tableLayout.addView(headerRow)
+    }
+
+    private fun noHorScroll(view: TextView): TextView {
+        view.setHorizontallyScrolling(false)
+        return view
+    }
+
+    private fun hasHeader(): Boolean {
+        return tableLayout.childCount > 0
+    }
+
+    private fun setBackgroundTextView(view: TextView, signalClass: String): TextView {
+        val context = view.context
+        val backgroundColor: ColorDrawable
+        when (signalClass) {
+            "0" -> {
+                backgroundColor = ColorDrawable(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.color_signal_class_0
+                    )
+                )
+                view.setTextColor(ContextCompat.getColor(context, R.color.black))
+            }
+
+            "1" -> {
+                backgroundColor = ColorDrawable(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.color_signal_class_1
+                    )
+                )
+                view.setTextColor(ContextCompat.getColor(context, R.color.black))
+            }
+
+            "2" -> {
+                backgroundColor = ColorDrawable(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.color_signal_class_2
+                    )
+                )
+                view.setTextColor(ContextCompat.getColor(context, R.color.white))
+            }
+
+            else -> {
+                backgroundColor = ColorDrawable(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.color_signal_class_def
+                    )
+                )
+                view.setTextColor(ContextCompat.getColor(context, R.color.black))
+            }
+        }
+        val border = getBorder(
+            ContextCompat.getColor(
+                context,
+                R.color.black
+            )
+        )
+        val layerDrawable = LayerDrawable(arrayOf(backgroundColor, border))
+
+        view.background = layerDrawable
+        return view
+    }
+
+    private fun setBackgroundHeader(view: TextView): TextView {
+        val context = view.context
+        val backgroundColor = ColorDrawable(
+            ContextCompat.getColor(
+                context,
+                R.color.color_background_header
+            )
+        )
+        val border = getBorder(
+            ContextCompat.getColor(
+                context,
+                R.color.black
+            )
+        )
+        val layerDrawable = LayerDrawable(arrayOf(backgroundColor, border))
+
+        view.background = layerDrawable
+        view.setTextColor(ContextCompat.getColor(context, R.color.black))
+        return view
     }
 
     private fun createTextView(text: String): TextView {
         val textView = TextView(tableLayout.context)
         textView.text = text
         textView.setPadding(20, 10, 20, 10)
+        return textView
+    }
 
-        // Создаем объект ShapeDrawable для установки границ
+    private fun getBorder(borderColor: Int): ShapeDrawable {
         val border = ShapeDrawable()
-        // Устанавливаем цвет границы
-        border.paint.color = Color.BLACK
-        // Устанавливаем толщину границы в пикселях
+        border.paint.color = borderColor
         val borderWidth = 2
         border.paint.strokeWidth = borderWidth.toFloat()
-        // Устанавливаем стиль границы (SOLID - сплошная линия)
         border.paint.style = Paint.Style.STROKE
-        // Устанавливаем объект ShapeDrawable в качестве фона у TextView
-        textView.background = border
-        return textView
+        return border
     }
 }

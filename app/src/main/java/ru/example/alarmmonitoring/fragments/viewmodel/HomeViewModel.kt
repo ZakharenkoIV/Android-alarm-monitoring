@@ -38,4 +38,8 @@ class HomeViewModel : ViewModel() {
         this.messageController = messageController
         messageController.setHomeTableData(tableData)
     }
+
+    fun clearTable() {
+        messageController.clearHomeMessage()
+    }
 }
